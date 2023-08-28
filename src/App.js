@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import ChartSetup from './Componenets/ChartSetup';
+import 'chart.js/auto';
+import  {ReactQueryDevtools} from 'react-query/devtools'
+import {QueryClientProvider, QueryClient} from 'react-query'
+import OnePageChart from './Componenets/OnePageChart';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+const queryClient = new QueryClient()
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <QueryClientProvider client={queryClient}>
+      <ChartSetup/>
+      <h1 className='text-center'>Charts Setup in one page</h1>
+      <OnePageChart/>
+      <ReactQueryDevtools position = {'bottom-right'}/>
+    </QueryClientProvider>
+    </>
   );
 }
 
